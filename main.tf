@@ -1,8 +1,8 @@
 provider "vsphere" {
     version = "1.22.0"
-    user           = var.vsphere_user
-    password       = var.vsphere_password
-    vsphere_server = var.vsphere_server
+    user           = var.vsphere-user
+    password       = var.vsphere-password
+    vsphere_server = var.vsphere-server
     allow_unverified_ssl = true
 }
 
@@ -44,9 +44,9 @@ data "vsphere_datacenter" "new-dc" {
 }
 
 resource "vsphere_host" "esxi01" {
-    hostname = var.esxi-vsphere_server
-    username = var.esxi-user
+    hostname = var.esxi-server
     password = var.esxi-password
+    username = var.esxi-user
     license = var.esxi-license
     datacenter = data.vsphere_datacenter.new-dc.id
 }
