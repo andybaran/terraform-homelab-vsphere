@@ -22,7 +22,7 @@ resource "vsphere_tag_category" "tag-category" {
 
 resource "vsphere_tag" "managed-by-tfc" {
     name = "managed-by-tfc"
-    category_id = data.vsphere_tag_category.tag-category.id
+    category_id = vsphere_tag_category.tag-category.id
     description = "Manged by Terraform Cloud"
 }
 
@@ -32,21 +32,17 @@ resource "vsphere_tag" "managed-by-tfc" {
 
 resource "vsphere_datacenter" "modern-datacenter" {
     name = "modern-datacenter"
-    tags = [data.vsphere_tag.managed-by-tfc.tag.id]
+    tags = [vsphere_tag.managed-by-tfc.id]
 }
 
 /***************************************************
 * Add a host
 ***************************************************/
 
-data "vsphere_datacenter" "new-dc" {
-    name = var.datacenter
-}
-
 resource "vsphere_host" "esxi01" {
     hostname = var.esxi-server
     password = var.esxi-password
     username = var.esxi-user
     license = var.esxi-license
-    datacenter = data.vsphere_datacenter.new-dc.id
+    datacenter = vsphere_datacenter.modern-datacenter.id
 }
