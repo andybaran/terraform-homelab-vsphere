@@ -32,7 +32,6 @@ resource "vsphere_tag" "managed-by-tfc" {
 
 resource "vsphere_datacenter" "modern-datacenter" {
     name = "modern-datacenter"
-    tags = [vsphere_tag.managed-by-tfc.id]
 }
 
 /***************************************************
