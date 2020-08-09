@@ -37,11 +37,14 @@ resource "vsphere_datacenter" "modern-datacenter" {
 /***************************************************
 * Add a host
 ***************************************************/
+data "vsphere_datacenter" "modern-datacenter" {
+    name = "modern-datacenter"
+}
 
 resource "vsphere_host" "esxi01" {
     hostname = var.esxi-server
     password = var.esxi-password
     username = var.esxi-user
     license = var.esxi-license
-    datacenter = vsphere_datacenter.modern-datacenter.id
+    datacenter = data.vsphere_datacenter.modern-datacenter.id
 }
