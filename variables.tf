@@ -29,3 +29,7 @@ variable "esxi-license" {
 variable "datacenter" {
     description = "vSphere Datacenter name"
 }
+
+variable "esxi-thumbprint" {
+    description = "esxi self signed cert thumbprint"
+}

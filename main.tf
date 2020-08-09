@@ -43,6 +43,7 @@ data "vsphere_datacenter" "modern-datacenter" {
 
 resource "vsphere_host" "esxi01" {
     hostname = var.esxi-server
+    thumbprint = var.esxi-thumbprint
     password = var.esxi-password
     username = var.esxi-user
     license = var.esxi-license
